@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Buscaminas</title>
+	<meta http-equiv="X-UA-Compatible" content="">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<!--Enlace de Fontawesowe-->
+	<link rel="stylesheet" type="text/css" href="ventor/font-awesome-4.7.0/css/font-awesome.css">
+	<script src="https://use.fontawesome.com/6bff936249.js"></script>
+	<!--Enlace de Bootstrap + Jquery-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="ventor/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!--Enlace de CSS-->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+	<script src="ventor/sweetalert/dist/sweetalert.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="ventor/sweetalert/dist/sweetalert.css">
+</head>
+
+<body onload="comenzar();">
+	<form class="text-center" name="formulario" action="">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="text-center">
+					<h1>Buscaminas</h1>
+				</div>
+				<hr>
+				<h4 class="text-center">Filas x Columnas : </h4>
+				<input class="text-center"  maxlength="2" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" name="tamano" tabindex="1" type="num" size="4" value="7"><br>
+				<h4 class="text-center">Número de bombas : </h4>
+				<input class="text-center"  maxlength="2" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" name="bombas" tabindex="2" type="num" size="4" value="7"><br><br>
+
+				<input type="button" class="boton" value="Crear tabla" id="datos" ">
+				<input type="button" class="boton" value="Nuevo juego" id="comenzar">
+			</div>
+		</div>
+	</form>
+	<hr>
+	<center>
+		<div id="tabla"></div>
+	</center>
+
+	<!--Enlace Javascript-->
+	<script type="text/javascript" src="assets/js/main.js"></script>
+</body>
+
+</html>
