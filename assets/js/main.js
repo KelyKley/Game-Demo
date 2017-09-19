@@ -5,7 +5,6 @@ document.getElementById("datos").addEventListener("click", datos);
 var filaXcolumna = 7;
 var bombas = 7;
 
-//Almacena datos de input
 function datos() {
     filaXcolumna = Number(window.document.formulario.tamano.value);
     bombas = Number(window.document.formulario.bombas.value);
@@ -13,6 +12,7 @@ function datos() {
 }
 
 var tablero;
+
 function crearTabla(num) {
     var x, y;
     tablero = new Array(num)
@@ -24,6 +24,7 @@ function crearTabla(num) {
 }
 
 var casillas_totales = filaXcolumna * filaXcolumna;
+
 function comenzar() {
     var x, y;
     delete(tablero);
@@ -34,17 +35,15 @@ function comenzar() {
     for (i = 0; i < filaXcolumna; i++) {
         estructurando = estructurando + "<tr>";
         for (j = 0; j < filaXcolumna; j++)
-            estructurando = estructurando + "<td><input type='button' class='boton1' id='boton_"
-            			 + i.toString() + "_" + j.toString() + "' onclick='calificar(" + i.toString() +	
-            			  "," + j.toString() + ");'></td>";
+            estructurando = estructurando + "<td><input type='button' class='botoncitos' id='boton_" +
+            i.toString() + "_" + j.toString() + "' onclick='calificar(" + i.toString() +
+            "," + j.toString() + ");'></td>";
         estructurando = estructurando + "</tr>"
     }
     estructurando = estructurando + "</table></form>";
     window.document.getElementById("tabla").innerHTML = estructurando;
     numeroBombas(bombas);
 }
-
-//ubicando las bombas en la tabla
 
 function guia(x, y) {
     if (x >= 0 && x <= filaXcolumna - 1 && y >= 0 && y <= filaXcolumna - 1)
@@ -68,12 +67,12 @@ function numeroBombas(bom) {
             if (tablero[i][j] < 0) {
                 guia(i - 1, j - 1);
                 guia(i - 1, j);
-                guia(i - 1, j + 1);
-                guia(i, j - 1);
                 guia(i, j + 1);
                 guia(i + 1, j - 1);
                 guia(i + 1, j);
                 guia(i + 1, j + 1);
+                guia(i - 1, j + 1);
+                guia(i, j - 1);
             }
 }
 
@@ -84,12 +83,12 @@ function descubrir(x, y) {
             casillas_totales--;
             if (tablero[x][y] == 0) {
                 descubrir(x - 1, y - 1);
+                descubrir(x - 1, y + 1);
+                descubrir(x, y + 1);
                 descubrir(x, y - 1);
                 descubrir(x + 1, y - 1);
                 descubrir(x - 1, y);
                 descubrir(x + 1, y);
-                descubrir(x - 1, y + 1);
-                descubrir(x, y + 1);
                 descubrir(x + 1, y + 1);
             }
         }
@@ -104,13 +103,13 @@ function calificar(x, y) {
                 if (tablero[i][j] >= 0)
                     window.document.formulario2.elements[j + filaXcolumna * i].value = tablero[i][j];
                 else
-                    window.document.formulario2.elements[j + filaXcolumna * i].style.backgroundImage = "url(assets/img/bom.png)";
+                    window.document.formulario2.elements[j + filaXcolumna * i].style.backgroundImage = "url(assets/img/bomba.png)";
         swal({
             title: "FATAL!",
             text: "Esto ha explotado :(",
             timer: 2000,
             showConfirmButton: false,
-            imageUrl: "assets/img/56.png"
+            imageUrl: "assets/img/pow.png"
         });
 
         casillas_totales = 0;
@@ -128,11 +127,9 @@ function calificar(x, y) {
             imageUrl: "assets/img/132.png"
         });
 
-            document.getElementById("over").removeEventListener("click", comenzar);
+        document.getElementById("over").removeEventListener("click", comenzar);
     }
 }
-
-
 
 $(document).mouseup(function(e) {
     var container = $("table");
